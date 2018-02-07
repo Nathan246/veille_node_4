@@ -35,10 +35,11 @@ console.log(reponse);
 
 //////////////////////////////////////////////////////////// Route : membres
 
-app.get('/membres', (req,res) => {
- fs.readFile( __dirname + "/public/data/" + "membres.txt", 'utf8', function (err, data) {
+app.get('/membres', (req, res) => {
+ fs.readFile( __dirname + "/public/data/" + "adresses.json", 'utf8', function (err, data) {
  console.log( data );
  res.end( data );
+ });
 })
 
 var server = app.listen(8081, function () {
