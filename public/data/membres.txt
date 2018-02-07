@@ -13,4 +13,4 @@
       "nom" : "Luc Marcil",
      "telephone" : "514-222-9233",
      "id": 3    
-   }
+   }{"prenom":"test","nom":"test","telephone":"test","courriel":"test"}
