@@ -6,7 +6,7 @@ app.use(express.static('public'));
 
 app.get('/formulaire', function (req, res) {
  console.log(__dirname);
- res.sendFile( __dirname + "/public/html" + "01_form.htm" );
+ res.sendFile( __dirname + "/public/html/" + "01_form.htm" );
 })
 
 ///////////////////////////////////////////////////////////// Route /
@@ -30,13 +30,17 @@ let reponse = {
  courriel:req.query.courriel
  };
 console.log(reponse);
+fs.appendFile(__dirname + "/public/data/" + "membres.txt", JSON.stringify(reponse), function (err) {
+  if (err) throw err;
+  console.log('Sauvegardé');
+});
  res.end(JSON.stringify(reponse));
 })
 
 //////////////////////////////////////////////////////////// Route : membres
 
 app.get('/membres', (req, res) => {
- fs.readFile( __dirname + "/public/data/" + "adresses.json", 'utf8', function (err, data) {
+ fs.readFile( __dirname + "/public/data/" + "membres.txt", 'utf8', function (err, data) {
  console.log( data );
  res.end( data );
  });
