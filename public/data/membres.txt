@@ -18,4 +18,4 @@
      "telephone" : "514-222-9233",
      "courriel" : "lmarcil@cmaisonneuve.qc.ca",
      "id": 3    
-   }{"prenom":"test","nom":"test","telephone":"test","courriel":"test@test.com"}
+   },{"prenom":"test","nom":"test","telephone":"test","courriel":"test@test.com"},{"prenom":"test2","nom":"test2","telephone":"test2","courriel":"test2"}

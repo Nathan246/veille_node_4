@@ -3,6 +3,19 @@ const app = express();
 const fs = require('fs');
 app.use(express.static('public'));
 
+const transforme_entableau = (collection) => {
+	let chaine = '<header><meta charset="UTF-8"></header><table><tr><th>Prénom</th><th>Nom</th><th>Téléphone</th><th>Courriel</th></tr>'
+	for(elm of collection){
+		chaine += "<tr><td>";
+		for(p in elm){
+			chaine += elm[p] + "</td><td>";
+		}
+		chaine += "</td></tr>";
+	}
+	chaine += "</table>"
+	return chaine
+}
+
 ///////////////////////////////////////////////////////////// Route /html/01_form.htm
 
 app.get('/formulaire', function (req, res) {
@@ -24,6 +37,7 @@ app.get('/traiter_get', function (req, res) {
 console.log('la route /traiter_get')
 
 // on utilise l'objet req.query pour récupérer les données GET
+let = reponseString = ",";
 let reponse = {
  prenom:req.query.prenom,
  nom:req.query.nom,
@@ -31,7 +45,8 @@ let reponse = {
  courriel:req.query.courriel
  };
 console.log(reponse);
-fs.appendFile(__dirname + "/public/data/" + "membres.txt", JSON.stringify(reponse), function (err) {
+reponseString += JSON.stringify(reponse);
+fs.appendFile(__dirname + "/public/data/" + "membres.txt", reponseString, function (err) {
   if (err) throw err;
   console.log('Sauvegardé');
 });
@@ -44,7 +59,11 @@ app.get('/membres', (req, res) => {
  fs.readFile( __dirname + "/public/data/" + "membres.txt", 'utf8', function (err, data) {
  console.log( data );
 
- let html = "<table><tr><th>Prénom</th><th>Nom</th><th>Téléphone</th><th>Courriel</th></tr>"
+ let collection = JSON.parse('[' + data + ']');
+
+ res.end(transforme_entableau(collection))
+
+/* let html = "<table><tr><th>Prénom</th><th>Nom</th><th>Téléphone</th><th>Courriel</th></tr>"
  let liste = JSON.parse(data);
  for (let i in liste){
  	html += "<tr><td>" + liste["prenom"] + "</td><td>" + liste["nom"] + "</td><td>" + liste["telephone"] + "</td><td>" + liste["courriel"] + "</td></tr>" 
@@ -52,7 +71,7 @@ app.get('/membres', (req, res) => {
 
  html += "</table>"
 
- res.end( html );
+ res.end( html );*/
  });
 })
 
