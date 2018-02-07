@@ -31,7 +31,7 @@ let reponse = {
  courriel:req.query.courriel
  };
 console.log(reponse);
-fs.appendFile(__dirname + "/public/data/" + "membres.txt", JSON.stringify(reponse), function (err) {
+fs.appendFile(__dirname + "/public/data/" + "membres.txt", reponse, function (err) {
   if (err) throw err;
   console.log('Sauvegardé');
 });
