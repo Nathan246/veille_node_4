@@ -43,7 +43,16 @@ fs.appendFile(__dirname + "/public/data/" + "membres.txt", JSON.stringify(repons
 app.get('/membres', (req, res) => {
  fs.readFile( __dirname + "/public/data/" + "membres.txt", 'utf8', function (err, data) {
  console.log( data );
- res.end( data );
+
+ let html = "<table><tr><th>Prénom</th><th>Nom</th><th>Téléphone</th><th>Courriel</th></tr>"
+ let liste = JSON.parse(data);
+ for (let i in liste){
+ 	html += "<tr><td>" + liste["prenom"] + "</td><td>" + liste["nom"] + "</td><td>" + liste["telephone"] + "</td><td>" + liste["courriel"] + "</td></tr>" 
+ }
+
+ html += "</table>"
+
+ res.end( html );
  });
 })
 
